@@ -11,6 +11,7 @@ window = pygame.display.set_mode((WIDTH, HEIGHT))
 title = pygame.display.set_caption('Platformer')
 clock, FPS = pygame.time.Clock(), 60
 
+#The function below is just used once, so it doens't really matter
 def write(text, size, position:tuple, color, centered:pygame.Rect or bool = None):
     font = pygame.font.SysFont('segoeuisemibold', size)
     text = font.render(text, True, color)
@@ -24,8 +25,9 @@ def write(text, size, position:tuple, color, centered:pygame.Rect or bool = None
     else:
         window.blit(text, position)
 
+#Here I just make a dict with all the images for the pieces so it's easier to draw them later
 def pieces():
-    dir_path = r'C:\Users\horac\OneDrive\Escritorio\Python\pygame\pieces'
+    dir_path = 'pieces'
     images = [join(dir_path, image) for image in listdir(dir_path)]
 
     pieces = {}
@@ -168,7 +170,7 @@ def valid_moves(piece, board):
     moves = inside(moves_set)
     
     for square in moves:
-        if board[square]['occupied'] == True or board[square]['piece'] != None and square in moves:
+        if board[square]['occupied'] == True or board[square]['piece'] != None and square in moves: #Here's the problem I was talking about
             moves.remove(square)
 
     return moves
